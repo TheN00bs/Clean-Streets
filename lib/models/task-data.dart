@@ -38,16 +38,17 @@ class TaskData extends ChangeNotifier {
   }
 */
   void getOnlineTask(String id) async {
-    var url = 'https://jsonplaceholder.typicode.com/todos';
+    var url = 'https://cleanstreets.herokuapp.com/mahershi1999@gmail.com';//https://jsonplaceholder.typicode.com/todos
     var response = await http.get(url);
     if (response.statusCode == 200) {
-      var jsonResponse = convert.jsonDecode(response.body);
-      print(jsonResponse[0]['title']);
-      /*
-      var itemCount = jsonResponse['totalItems'];
-      print('Number of books about http: $itemCount.');
-
-       */
+      List jsonResponse = convert.jsonDecode(response.body);
+      print(jsonResponse);
+      for(var x in jsonResponse) {
+        Task temp = new Task(id: x['id'], title: x['user']);
+        _tasks.add(temp);
+        notifyListeners();
+        print(x['title']);
+      }
     } else {
       print('Request failed with status: ${response.statusCode}.');
     }
