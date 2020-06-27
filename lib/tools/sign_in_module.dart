@@ -36,8 +36,6 @@ Future<String> signInWithGoogle() async {
   email = user.email;
   imageUrl = user.photoUrl;
 
-  print(imageUrl);
-
   return 'signInWithGoogle succeeded: $user';
 }
 
