@@ -14,13 +14,12 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Colors.white,
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Image(image: AssetImage("images/clean_street.png"), height: 110.0,),
+              Image(image: AssetImage("images/clean_streets.png"), height: 110.0,),
               SizedBox(height: 50),
               _signInButton(),
             ],

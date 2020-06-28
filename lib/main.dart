@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => TaskData(),
       child: MaterialApp(
+        theme: ThemeData.dark(),
         initialRoute: LoginScreen.id,
         routes: {
           HomeScreen.id: (context) => HomeScreen(),
