@@ -1,17 +1,58 @@
+
+
 import 'package:CleanStreets/screens/newhome.dart';
 import 'package:CleanStreets/tools/sign_in_module.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:location/location.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = 'login_screen';
   @override
   _LoginScreenState createState() => _LoginScreenState();
+
+  getLocationPermission() async {
+    Location location = new Location();
+    bool _locationEnabled = await location.serviceEnabled();
+    if(!_locationEnabled){
+      _locationEnabled = await location.requestService();
+
+      if(!_locationEnabled){
+        SystemNavigator.pop();
+      }
+    }
+    PermissionStatus _permissionGranted = await location.hasPermission();
+    if(_permissionGranted == PermissionStatus.denied){
+      _permissionGranted = await location.requestPermission();
+
+      if(_permissionGranted == PermissionStatus.denied){
+        SystemNavigator.pop();
+      }
+    }
+
+    /*GeolocationStatus geolocationStatus =
+        await Geolocator().checkGeolocationPermissionStatus();
+    print(geolocationStatus);
+    if (geolocationStatus == GeolocationStatus.denied) {
+      try {
+        Position position = await Geolocator()
+            .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+        print(geolocationStatus);
+        print(position);
+
+      } catch (e) {
+        SystemNavigator.pop();
+      }
+    }*/
+  }
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  @override
+  LoginScreen get widget => super.widget;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,24 +78,10 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();
-    getLocationPermission();
+    widget.getLocationPermission();
   }
 
-  getLocationPermission() async {
-    GeolocationStatus geolocationStatus =
-        await Geolocator().checkGeolocationPermissionStatus();
-    print(geolocationStatus);
-    if (geolocationStatus == GeolocationStatus.denied) {
-      try {
-        Position position = await Geolocator()
-            .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-        print(geolocationStatus);
-        print(position);
-      } catch (e) {
-        SystemNavigator.pop();
-      }
-    }
-  }
+
 
   Widget _signInButton() {
     return OutlineButton(

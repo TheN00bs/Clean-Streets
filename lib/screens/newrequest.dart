@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:CleanStreets/models/shared-data.dart';
 import 'package:flutter/material.dart';
 
+import 'login.dart';
+
 class NewRequestScreen extends StatefulWidget {
   static const String id = "new_request_screen";
   final File image;
@@ -59,6 +61,7 @@ class _NewRequestScreenState extends State<NewRequestScreen> {
                       horizontal: 20.0,
                     ),
                     onPressed: () async {
+                      LoginScreen().getLocationPermission();
                       var response = await SharedData.sendData(
                           SharedData.email, titleController.text, widget.image);
                       print(response);
