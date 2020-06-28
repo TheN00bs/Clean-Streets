@@ -2,12 +2,17 @@ import 'package:CleanStreets/screens/home.dart';
 import 'package:CleanStreets/tools/sign_in_module.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:geolocator/geolocator.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = 'login_screen';
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
+
+
+
 
 class _LoginScreenState extends State<LoginScreen> {
   @override
@@ -27,6 +32,26 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getLocationPermission();
+  }
+
+  getLocationPermission() async {
+    GeolocationStatus geolocationStatus  = await Geolocator().checkGeolocationPermissionStatus();
+    print(geolocationStatus);
+    if(geolocationStatus == GeolocationStatus.denied) {
+      try{
+        Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+        print(geolocationStatus);
+        print(position);
+      }catch(e){
+        SystemNavigator.pop();
+      }
+    }
   }
 
   Widget _signInButton() {
