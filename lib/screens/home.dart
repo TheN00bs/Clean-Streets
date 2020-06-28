@@ -4,6 +4,7 @@ import 'package:CleanStreets/models/shared-data.dart';
 import 'package:CleanStreets/widgets/request-list.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:CleanStreets/screens/newrequest.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String id = 'home_screen';
@@ -21,6 +22,9 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       _image = File(pickedFile.path);
     });
+    Navigator.push(context, MaterialPageRoute(
+      builder: (context) => NewRequestScreen(image: _image, ),
+    ));
   }
 
   @override
