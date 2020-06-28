@@ -22,7 +22,7 @@ class _NewRequestScreenState extends State<NewRequestScreen>{
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      body: Column(
+      body: ListView(
         children: [
           ConstrainedBox(
           constraints: BoxConstraints(
@@ -35,6 +35,9 @@ class _NewRequestScreenState extends State<NewRequestScreen>{
             ),
           ),
           Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.blue),
+            ),
               margin: EdgeInsets.all(20),
               child: TextField(
                 decoration: InputDecoration(
@@ -43,6 +46,13 @@ class _NewRequestScreenState extends State<NewRequestScreen>{
                 ),
               )
           ),
+          Container(
+            margin: EdgeInsets.all(20),
+            alignment: Alignment.center,
+            child: OutlineButton(
+              child: Text("Confirm", style: TextStyle(color: Colors.white),),
+            ),
+          )
         ],
       )
     );
