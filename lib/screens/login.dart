@@ -34,7 +34,6 @@ class _LoginScreenState extends State<LoginScreen> {
       splashColor: Colors.grey,
       onPressed: () {
         signInWithGoogle().whenComplete(() {
-          //Navigator.pushNamed(context, HomeScreen.id);
           Navigator.popAndPushNamed(context, HomeScreen.id);
         });
       },
