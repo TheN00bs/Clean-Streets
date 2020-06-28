@@ -1,4 +1,4 @@
-import 'package:CleanStreets/screens/home.dart';
+import 'package:CleanStreets/screens/newhome.dart';
 import 'package:CleanStreets/tools/sign_in_module.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,9 +11,6 @@ class LoginScreen extends StatefulWidget {
   _LoginScreenState createState() => _LoginScreenState();
 }
 
-
-
-
 class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
@@ -24,7 +21,10 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Image(image: AssetImage("images/clean_streets.png"), height: 110.0,),
+              Image(
+                image: AssetImage("images/clean_streets.png"),
+                height: 110.0,
+              ),
               SizedBox(height: 50),
               _signInButton(),
             ],
@@ -41,14 +41,16 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   getLocationPermission() async {
-    GeolocationStatus geolocationStatus  = await Geolocator().checkGeolocationPermissionStatus();
+    GeolocationStatus geolocationStatus =
+        await Geolocator().checkGeolocationPermissionStatus();
     print(geolocationStatus);
-    if(geolocationStatus == GeolocationStatus.denied) {
-      try{
-        Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    if (geolocationStatus == GeolocationStatus.denied) {
+      try {
+        Position position = await Geolocator()
+            .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
         print(geolocationStatus);
         print(position);
-      }catch(e){
+      } catch (e) {
         SystemNavigator.pop();
       }
     }
@@ -59,7 +61,8 @@ class _LoginScreenState extends State<LoginScreen> {
       splashColor: Colors.grey,
       onPressed: () {
         signInWithGoogle().whenComplete(() {
-          Navigator.popAndPushNamed(context, HomeScreen.id);
+          //Navigator.popAndPushNamed(context, HomeScreen.id);
+          Navigator.popAndPushNamed(context, NewHomeScreen.id);
         });
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),

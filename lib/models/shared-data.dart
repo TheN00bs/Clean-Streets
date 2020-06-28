@@ -9,15 +9,23 @@ class SharedData {
   static String name;
   static String email;
   static String profileUrl;
+  static bool alreadyRequested = false;
 
   static List<Task> _tasks = [];
 
   static var selectedRequest;
 
-  static Future<List<Task>> getData() async {
+  static int getCount() {
+    return _tasks.length;
+  }
 
-    var url = 'https://cleanstreets.herokuapp.com/' +
-        email; //https://jsonplaceholder.typicode.com/todos
+  static List<Task> getListItems() {
+    return _tasks;
+  }
+
+  static Future<List<Task>> getData() async {
+    alreadyRequested = true;
+    var url = 'https://cleanstreets.herokuapp.com/' + email;
     var response = await http.get(url);
     if (response.statusCode == 200) {
       List jsonResponse = convert.jsonDecode(response.body);
@@ -30,12 +38,13 @@ class SharedData {
     } else {
       print('Request failed with status: ${response.statusCode}.');
     }
-
+    alreadyRequested = false;
     return _tasks;
   }
 
   static Future<Task> sendData(String user, String title, File imgFile) async {
-    Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    Position position = await Geolocator()
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     print(position);
     String latitude = position.latitude.toString();
     String longitude = position.longitude.toString();

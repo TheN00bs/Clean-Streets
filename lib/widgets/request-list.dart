@@ -10,7 +10,7 @@ class RequestList extends StatefulWidget {
 }
 
 class _RequestListState extends State<RequestList> {
-  List<Task> _tasks = [];
+  List<Task> _tasks = SharedData.getListItems();
   @override
   initState() {
     super.initState();
@@ -18,10 +18,14 @@ class _RequestListState extends State<RequestList> {
   }
 
   callGetData() async {
-    var tasks = await SharedData.getData();
-    setState(() {
-      _tasks = tasks;
-    });
+    if (SharedData.alreadyRequested == false) {
+      var tasks = await SharedData.getData();
+      if (this.mounted) {
+        setState(() {
+          _tasks = tasks;
+        });
+      }
+    }
   }
 
   List<Widget> getTaskList(List<Task> data) {
