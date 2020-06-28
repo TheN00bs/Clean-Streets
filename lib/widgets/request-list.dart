@@ -1,4 +1,5 @@
 import 'package:CleanStreets/models/Task.dart';
+import 'package:CleanStreets/screens/preview.dart';
 import '../models/shared-data.dart';
 import 'package:CleanStreets/widgets/request-tile.dart';
 import 'package:flutter/material.dart';
@@ -31,12 +32,8 @@ class _RequestListState extends State<RequestList> {
           id: da.id,
           title: da.title,
           callbackOnTap: () async {
-            var data = await SharedData.getOne(da.id);
-            setState(() {
-              _tasks.add(
-                new Task(id: 'sdfasdfasdf', title: 'bamboo'),
-              );
-            });
+            await SharedData.getOne(da.id);
+            Navigator.pushNamed(context, PreviewScreen.id);
           },
         ),
       );

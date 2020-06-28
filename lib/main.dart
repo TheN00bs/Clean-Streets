@@ -1,6 +1,7 @@
 import 'package:CleanStreets/screens/home.dart';
 import 'package:CleanStreets/screens/login.dart';
 import 'package:CleanStreets/screens/newrequest.dart';
+import 'package:CleanStreets/screens/preview.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
       routes: {
         HomeScreen.id: (context) => HomeScreen(),
         LoginScreen.id: (context) => LoginScreen(),
+        PreviewScreen.id: (context) => PreviewScreen(),
         NewRequestScreen.id: (context) => NewRequestScreen(
               image: null,
             ),
