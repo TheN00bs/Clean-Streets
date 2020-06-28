@@ -1,5 +1,5 @@
 import 'package:CleanStreets/models/Task.dart';
-import 'package:CleanStreets/models/shared-data.dart';
+import '../models/shared-data.dart';
 import 'package:CleanStreets/widgets/request-tile.dart';
 import 'package:flutter/material.dart';
 

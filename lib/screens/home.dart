@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:CleanStreets/models/shared-data.dart';
 import 'package:CleanStreets/widgets/request-list.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
