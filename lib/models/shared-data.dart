@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:CleanStreets/models/Task.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
+import 'package:geolocator/geolocator.dart';
 
 class SharedData {
   static String name;
@@ -14,6 +15,7 @@ class SharedData {
   static var selectedRequest;
 
   static Future<List<Task>> getData() async {
+
     var url = 'https://cleanstreets.herokuapp.com/' +
         email; //https://jsonplaceholder.typicode.com/todos
     var response = await http.get(url);
@@ -33,6 +35,10 @@ class SharedData {
   }
 
   static Future<Task> sendData(String user, String title, File imgFile) async {
+    Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    print(position);
+    String latitude = position.latitude.toString();
+    String longitude = position.longitude.toString();
     var url = 'https://cleanstreets.herokuapp.com/newrequest';
     List<int> imageBytes = imgFile.readAsBytesSync();
     String base64Image = convert.base64Encode(imageBytes);
@@ -46,7 +52,9 @@ class SharedData {
           'user': user,
           'title': title,
           'img': base64Image,
-          'status': 'active'
+          'status': 'active',
+          'latitude': latitude,
+          'longitude': longitude
         },
       ),
     );
