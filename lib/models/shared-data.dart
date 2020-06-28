@@ -11,6 +11,8 @@ class SharedData {
 
   static List<Task> _tasks = [];
 
+  static var selectedRequest;
+
   static Future<List<Task>> getData() async {
     var url = 'https://cleanstreets.herokuapp.com/' +
         email; //https://jsonplaceholder.typicode.com/todos
@@ -44,6 +46,7 @@ class SharedData {
           'user': user,
           'title': title,
           'img': base64Image,
+          'status': 'active'
         },
       ),
     );
@@ -59,13 +62,17 @@ class SharedData {
     }
   }
 
-  static Future getOne(String id) async {
+  static Future<String> getOne(String id) async {
     var url = 'https://cleanstreets.herokuapp.com/' + email + '/' + id;
     var response = await http.get(url);
     if (response.statusCode == 200) {
       print(response.body);
+      //return convert.jsonDecode(response.body);
+      selectedRequest = convert.jsonDecode(response.body);
+      return 'success';
     } else {
       print('Request failed with status: ${response.statusCode}.');
+      return null;
     }
   }
 }
