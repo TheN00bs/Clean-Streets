@@ -5,9 +5,7 @@ import 'package:flutter/material.dart';
 
 class RequestList extends StatefulWidget {
   @override
-  _RequestListState createState() =>_RequestListState();
-
-
+  _RequestListState createState() => _RequestListState();
 }
 
 class _RequestListState extends State<RequestList> {
@@ -26,20 +24,35 @@ class _RequestListState extends State<RequestList> {
   }
 
   List<Widget> getTaskList(List<Task> data) {
-    List<RequestTile>  _tiles= [];
-    for(Task da in data) {
-      _tiles.add(RequestTile(id: da.id, title: da.title,),);
+    List<Widget> _tiles = [];
+    for (Task da in data) {
+      _tiles.add(
+        RequestTile(
+          id: da.id,
+          title: da.title,
+          callbackOnTap: () {
+            SharedData.getOne(da.id);
+          },
+        ),
+      );
+      _tiles.add(Divider());
     }
     return _tiles;
   }
 
   @override
   Widget build(BuildContext context) {
-    if(_tasks.length==0)
-      return Center(child: Text("You haven't requested anything yet.", textAlign: TextAlign.center, style: TextStyle(
-        fontSize: 25.0,
-        color: Colors.white70,
-      ),),);
+    if (_tasks.length == 0)
+      return Center(
+        child: Text(
+          "You haven't requested anything yet.",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 25.0,
+            color: Colors.white70,
+          ),
+        ),
+      );
     else
       return ListView(
         children: getTaskList(_tasks),

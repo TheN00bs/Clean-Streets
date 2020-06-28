@@ -17,6 +17,9 @@ class RequestTile extends StatelessWidget {
       onTap: callbackOnTap,
       title: Text(
         title,
+        style: TextStyle(
+          fontSize: 20.0,
+        ),
       ),
     );
   }

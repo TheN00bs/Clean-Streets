@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:CleanStreets/models/shared-data.dart';
 import 'package:CleanStreets/widgets/request-list.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -10,12 +11,13 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen>{
+class _HomeScreenState extends State<HomeScreen> {
   File _image;
   final picker = ImagePicker();
 
   Future getImage() async {
-    final pickedFile = await picker.getImage(source: ImageSource.camera, maxHeight: 480, maxWidth: 640);
+    final pickedFile = await picker.getImage(
+        source: ImageSource.camera, maxHeight: 480, maxWidth: 640);
     setState(() {
       _image = File(pickedFile.path);
     });
@@ -25,7 +27,6 @@ class _HomeScreenState extends State<HomeScreen>{
   void initState() {
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
