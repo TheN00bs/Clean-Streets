@@ -2,14 +2,10 @@ import 'dart:io';
 
 import 'package:CleanStreets/widgets/request-list.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:CleanStreets/screens/newrequest.dart';
-import 'package:geolocator/geolocator.dart';
 
-enum PermissionGroup{
-  locationWhenInUse
-}
+enum PermissionGroup { locationWhenInUse }
 
 class HomeScreen extends StatefulWidget {
   static const String id = 'home_screen';
@@ -43,9 +39,6 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
   }
-
-
-
 
   @override
   Widget build(BuildContext context) {
