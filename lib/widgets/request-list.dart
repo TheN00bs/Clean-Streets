@@ -36,7 +36,7 @@ class _RequestListState extends State<RequestList> {
   @override
   Widget build(BuildContext context) {
     if(_tasks.length==0)
-      return Center(child: Text("You haven't requested anything yet!!", textAlign: TextAlign.center, style: TextStyle(
+      return Center(child: Text("You haven't requested anything yet.", textAlign: TextAlign.center, style: TextStyle(
         fontSize: 25.0,
         color: Colors.white70,
       ),),);
