@@ -61,7 +61,8 @@ class _NewRequestScreenState extends State<NewRequestScreen> {
                       horizontal: 20.0,
                     ),
                     onPressed: () async {
-                      LoginScreen().getLocationPermission();
+                      print("Pressed");
+                      SharedData.getLocationPermission();
                       var response = await SharedData.sendData(
                           SharedData.email, titleController.text, widget.image);
                       print(response);

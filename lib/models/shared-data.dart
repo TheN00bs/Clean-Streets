@@ -4,6 +4,9 @@ import 'package:CleanStreets/models/Task.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 import 'package:geolocator/geolocator.dart';
+import 'package:flutter/services.dart';
+import 'package:location/location.dart' as loc;
+
 
 class SharedData {
   static String name;
@@ -93,5 +96,42 @@ class SharedData {
       print('Request failed with status: ${response.statusCode}.');
       return null;
     }
+  }
+
+  static getLocationPermission() async {
+    print("In");
+    loc.Location location = new loc.Location();
+    bool _locationEnabled = await location.serviceEnabled();
+    if(!_locationEnabled){
+      print("Asking Location");
+      _locationEnabled = await location.requestService();
+
+      if(!_locationEnabled){
+        SystemNavigator.pop();
+      }
+    }
+    loc.PermissionStatus _permissionGranted = await location.hasPermission();
+    if(_permissionGranted == loc.PermissionStatus.denied){
+      _permissionGranted = await location.requestPermission();
+
+      if(_permissionGranted == loc.PermissionStatus.denied){
+        SystemNavigator.pop();
+      }
+    }
+
+    /*GeolocationStatus geolocationStatus =
+        await Geolocator().checkGeolocationPermissionStatus();
+    print(geolocationStatus);
+    if (geolocationStatus == GeolocationStatus.denied) {
+      try {
+        Position position = await Geolocator()
+            .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+        print(geolocationStatus);
+        print(position);
+
+      } catch (e) {
+        SystemNavigator.pop();
+      }
+    }*/
   }
 }
