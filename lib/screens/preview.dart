@@ -15,15 +15,10 @@ class _PreviewScreenState extends State<PreviewScreen> {
     Uint8List bytes = convert.base64Decode(SharedData.selectedRequest['img']);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Clean Streets'),
+        title: Text(SharedData.selectedRequest['title']),
       ),
       body: Column(
         children: <Widget>[
-          Text(
-            SharedData.selectedRequest['title'],
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 30.0),
-          ),
           Image.memory(bytes),
           Text(SharedData.selectedRequest['status']),
           Text('DELETE')
