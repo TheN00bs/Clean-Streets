@@ -24,7 +24,7 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
       appBar: AppBar(
         title: Text('Clean Streets'),
       ),
-      body: _tabs[_currentIndex],
+      body: _currentIndex == 1 ? CameraPreviewPage() : _tabs[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
@@ -53,6 +53,9 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
             Navigator.pushNamed(context, CameraScreen.id).then(
               (value) {
                 print(SharedData.cameraImage);
+                setState(() {
+                  _currentIndex = 1;
+                });
               },
             );
           }
