@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:CleanStreets/models/shared-data.dart';
 import 'package:CleanStreets/widgets/request-list.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -19,12 +18,15 @@ class _HomeScreenState extends State<HomeScreen> {
   Future getImage() async {
     final pickedFile = await picker.getImage(
         source: ImageSource.camera, maxHeight: 480, maxWidth: 640);
-    setState(() {
-      _image = File(pickedFile.path);
-    });
-    Navigator.push(context, MaterialPageRoute(
-      builder: (context) => NewRequestScreen(image: _image, ),
-    ));
+    _image = File(pickedFile.path);
+
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => NewRequestScreen(
+            image: _image,
+          ),
+        ));
   }
 
   @override

@@ -1,5 +1,5 @@
 import 'package:CleanStreets/models/Task.dart';
-import 'package:CleanStreets/models/shared-data.dart';
+import '../models/shared-data.dart';
 import 'package:CleanStreets/widgets/request-tile.dart';
 import 'package:flutter/material.dart';
 
@@ -30,8 +30,13 @@ class _RequestListState extends State<RequestList> {
         RequestTile(
           id: da.id,
           title: da.title,
-          callbackOnTap: () {
-            SharedData.getOne(da.id);
+          callbackOnTap: () async {
+            var data = await SharedData.getOne(da.id);
+            setState(() {
+              _tasks.add(
+                new Task(id: 'sdfasdfasdf', title: 'bamboo'),
+              );
+            });
           },
         ),
       );
