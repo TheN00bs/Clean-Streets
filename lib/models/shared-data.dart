@@ -30,7 +30,7 @@ class SharedData {
     return _tasks;
   }
 
-  static void sendData(String user, String title, File imgFile) async {
+  static Future<Task> sendData(String user, String title, File imgFile) async {
     var url = 'https://cleanstreets.herokuapp.com/newrequest';
     List<int> imageBytes = imgFile.readAsBytesSync();
     String base64Image = convert.base64Encode(imageBytes);
@@ -48,12 +48,14 @@ class SharedData {
       ),
     );
 
-    print(response.body);
-
     if (response.statusCode == 200) {
-      print('success....!!!---');
+      var res = convert.jsonDecode(response.body);
+      Task temp = new Task(id: res['id'], title: res['title']);
+      _tasks.add(temp);
+      return temp;
     } else {
       print('Request failed with status: ${response.statusCode}.');
+      return null;
     }
   }
 

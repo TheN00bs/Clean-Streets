@@ -18,9 +18,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Future getImage() async {
     final pickedFile = await picker.getImage(
         source: ImageSource.camera, maxHeight: 480, maxWidth: 640);
-    setState(() {
-      _image = File(pickedFile.path);
-    });
+    _image = File(pickedFile.path);
+
     Navigator.push(
         context,
         MaterialPageRoute(

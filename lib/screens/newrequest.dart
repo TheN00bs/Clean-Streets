@@ -58,9 +58,11 @@ class _NewRequestScreenState extends State<NewRequestScreen> {
                       vertical: 10.0,
                       horizontal: 20.0,
                     ),
-                    onPressed: () {
-                      SharedData.sendData(
+                    onPressed: () async {
+                      var response = await SharedData.sendData(
                           SharedData.email, titleController.text, widget.image);
+                      print(response);
+                      print('====7=7=7=7=7=7=777777777777');
                     },
                     child: Text(
                       'Submit',

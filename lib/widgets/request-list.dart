@@ -30,8 +30,13 @@ class _RequestListState extends State<RequestList> {
         RequestTile(
           id: da.id,
           title: da.title,
-          callbackOnTap: () {
-            SharedData.getOne(da.id);
+          callbackOnTap: () async {
+            var data = await SharedData.getOne(da.id);
+            setState(() {
+              _tasks.add(
+                new Task(id: 'sdfasdfasdf', title: 'bamboo'),
+              );
+            });
           },
         ),
       );
