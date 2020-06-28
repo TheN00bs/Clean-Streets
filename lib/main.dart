@@ -1,3 +1,4 @@
+import 'package:CleanStreets/cams/camera_screen.dart';
 import 'package:CleanStreets/screens/home.dart';
 import 'package:CleanStreets/screens/login.dart';
 import 'package:CleanStreets/screens/newhome.dart';
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
         LoginScreen.id: (context) => LoginScreen(),
         PreviewScreen.id: (context) => PreviewScreen(),
         NewHomeScreen.id: (context) => NewHomeScreen(),
+        CameraScreen.id: (context) => CameraScreen(),
         NewRequestScreen.id: (context) => NewRequestScreen(
               image: null,
             ),

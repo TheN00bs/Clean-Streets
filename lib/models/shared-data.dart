@@ -11,6 +11,8 @@ class SharedData {
   static String profileUrl;
   static bool alreadyRequested = false;
 
+  static String cameraImage;
+
   static List<Task> _tasks = [];
 
   static var selectedRequest;

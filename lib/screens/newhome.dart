@@ -1,3 +1,6 @@
+import 'package:CleanStreets/cams/camera_preview.dart';
+import 'package:CleanStreets/cams/camera_screen.dart';
+import 'package:CleanStreets/models/shared-data.dart';
 import 'package:CleanStreets/widgets/history.dart';
 import 'package:CleanStreets/widgets/user-profile.dart';
 import 'package:flutter/material.dart';
@@ -10,15 +13,11 @@ class NewHomeScreen extends StatefulWidget {
 
 class _NewHomeScreenState extends State<NewHomeScreen> {
   int _currentIndex = 0;
-
   var _tabs = [
     HistoryWidget(),
-    Center(
-      child: Text('Camera'),
-    ),
+    CameraPreviewPage(),
     UserProfileWidget(),
   ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,6 +48,14 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
           setState(() {
             _currentIndex = index;
           });
+          if (index == 1) {
+            SharedData.cameraImage = null;
+            Navigator.pushNamed(context, CameraScreen.id).then(
+              (value) {
+                print(SharedData.cameraImage);
+              },
+            );
+          }
         },
       ),
     );
