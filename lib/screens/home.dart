@@ -1,8 +1,14 @@
 import 'dart:io';
 
+import 'package:CleanStreets/widgets/request-list.dart';
+import 'package:CleanStreets/widgets/request-tile.dart';
+
+import '../models/shared-data.dart';
 import 'package:CleanStreets/widgets/tasks-list.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+
+
 
 class HomeScreen extends StatefulWidget {
   static const String id = 'home_screen';
@@ -10,7 +16,7 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen>{
   File _image;
   final picker = ImagePicker();
 
@@ -19,6 +25,11 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       _image = File(pickedFile.path);
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
   }
 
 
@@ -34,8 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Expanded(
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 20.0),
-
-              child: TasksList(),
+              child: RequestList(),
             ),
           ),
         ],

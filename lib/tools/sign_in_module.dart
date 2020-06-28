@@ -1,10 +1,7 @@
+import '../models/shared-data.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-
-String name;
-String email;
-String imageUrl;
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final GoogleSignIn googleSignIn = GoogleSignIn();
@@ -32,9 +29,9 @@ Future<String> signInWithGoogle() async {
   assert(user.displayName != null);
   assert(user.photoUrl != null);
 
-  name = user.displayName;
-  email = user.email;
-  imageUrl = user.photoUrl;
+  SharedData.name = user.displayName;
+  SharedData.email = user.email;
+  SharedData.profileUrl = user.photoUrl;
 
   return 'signInWithGoogle succeeded: $user';
 }
