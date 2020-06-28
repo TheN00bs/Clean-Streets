@@ -1,5 +1,3 @@
-
-
 import 'package:CleanStreets/models/shared-data.dart';
 import 'package:CleanStreets/screens/newhome.dart';
 import 'package:CleanStreets/tools/sign_in_module.dart';
