@@ -9,13 +9,76 @@ class CameraPreviewPage extends StatefulWidget {
 }
 
 class _CameraPreviewPageState extends State<CameraPreviewPage> {
+  TextEditingController titleController = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     if (SharedData.cameraImage == null) {
       return Center(
         child: Text('No image Selected'),
       );
     }
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          ConstrainedBox(
+            constraints: BoxConstraints(
+                maxHeight: screenHeight / 2,
+                minHeight: screenHeight / 2,
+                minWidth: screenWidth,
+                maxWidth: screenWidth),
+            child: FittedBox(
+              child: Image.file(
+                File(SharedData.cameraImage),
+              ),
+              fit: BoxFit.cover,
+            ),
+          ),
+          Column(
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.all(20),
+                child: TextField(
+                  controller: titleController,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Title',
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.all(20),
+                child: RaisedButton(
+                  padding: EdgeInsets.symmetric(
+                    vertical: 10.0,
+                    horizontal: 20.0,
+                  ),
+                  onPressed: () async {
+                    var response = await SharedData.sendData(
+                      SharedData.email,
+                      titleController.text,
+                      File(SharedData.cameraImage),
+                    );
+                    print(response);
+                    print('====7=7=7=7=7=7=777777777777');
+                  },
+                  child: Text(
+                    'Submit',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+    /*
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
@@ -50,6 +113,7 @@ class _CameraPreviewPageState extends State<CameraPreviewPage> {
         )
       ],
     );
+    */
   }
 
   // Future<ByteData> getBytesFromFile() async {
