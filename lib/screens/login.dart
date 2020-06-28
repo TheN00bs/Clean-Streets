@@ -1,11 +1,8 @@
-
-
 import 'package:CleanStreets/screens/newhome.dart';
 import 'package:CleanStreets/tools/sign_in_module.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:location/location.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -16,18 +13,18 @@ class LoginScreen extends StatefulWidget {
   getLocationPermission() async {
     Location location = new Location();
     bool _locationEnabled = await location.serviceEnabled();
-    if(!_locationEnabled){
+    if (!_locationEnabled) {
       _locationEnabled = await location.requestService();
 
-      if(!_locationEnabled){
+      if (!_locationEnabled) {
         SystemNavigator.pop();
       }
     }
     PermissionStatus _permissionGranted = await location.hasPermission();
-    if(_permissionGranted == PermissionStatus.denied){
+    if (_permissionGranted == PermissionStatus.denied) {
       _permissionGranted = await location.requestPermission();
 
-      if(_permissionGranted == PermissionStatus.denied){
+      if (_permissionGranted == PermissionStatus.denied) {
         SystemNavigator.pop();
       }
     }
@@ -80,8 +77,6 @@ class _LoginScreenState extends State<LoginScreen> {
     super.initState();
     widget.getLocationPermission();
   }
-
-
 
   Widget _signInButton() {
     return OutlineButton(

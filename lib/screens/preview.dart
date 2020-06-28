@@ -17,12 +17,14 @@ class _PreviewScreenState extends State<PreviewScreen> {
       appBar: AppBar(
         title: Text(SharedData.selectedRequest['title']),
       ),
-      body: Column(
-        children: <Widget>[
-          Image.memory(bytes),
-          Text(SharedData.selectedRequest['status']),
-          Text('DELETE')
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Image.memory(bytes),
+            Text(SharedData.selectedRequest['status']),
+            Text('DELETE')
+          ],
+        ),
       ),
     );
   }
