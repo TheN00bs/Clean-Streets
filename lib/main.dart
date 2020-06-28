@@ -3,6 +3,7 @@ import 'package:CleanStreets/screens/login.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+
 import 'models/task-data.dart';
 
 void main() {
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       create: (context) => TaskData(),
       child: MaterialApp(
         theme: ThemeData.dark(),
-        initialRoute: LoginScreen.id,
+        initialRoute: HomeScreen.id,
         routes: {
           HomeScreen.id: (context) => HomeScreen(),
           LoginScreen.id: (context) => LoginScreen(),

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:CleanStreets/screens/newrequest.dart';
 import 'package:CleanStreets/widgets/tasks-list.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -19,6 +20,9 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       _image = File(pickedFile.path);
     });
+    Navigator.push(context, MaterialPageRoute(
+      builder: (context) => NewRequestScreen(image: _image, ),
+    ));
   }
 
 
