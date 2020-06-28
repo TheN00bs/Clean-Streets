@@ -11,13 +11,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: ThemeData.dark(),
-        initialRoute: LoginScreen.id,
-        routes: {
-          HomeScreen.id: (context) => HomeScreen(),
-          LoginScreen.id: (context) => LoginScreen(),
-          NewRequestScreen.id: (context) => NewRequestScreen(),
-        },
+      theme: ThemeData.dark(),
+      initialRoute: LoginScreen.id,
+      routes: {
+        HomeScreen.id: (context) => HomeScreen(),
+        LoginScreen.id: (context) => LoginScreen(),
+        NewRequestScreen.id: (context) => NewRequestScreen(
+              image: null,
+            ),
+      },
     );
   }
 }

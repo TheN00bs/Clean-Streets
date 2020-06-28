@@ -21,9 +21,13 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       _image = File(pickedFile.path);
     });
-    Navigator.push(context, MaterialPageRoute(
-      builder: (context) => NewRequestScreen(image: _image, ),
-    ));
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => NewRequestScreen(
+            image: _image,
+          ),
+        ));
   }
 
   @override

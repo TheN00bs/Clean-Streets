@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:CleanStreets/models/Task.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
@@ -28,14 +30,38 @@ class SharedData {
     return _tasks;
   }
 
+  static void sendData(String user, String title, File imgFile) async {
+    var url = 'https://cleanstreets.herokuapp.com/newrequest';
+    List<int> imageBytes = imgFile.readAsBytesSync();
+    String base64Image = convert.base64Encode(imageBytes);
+    var response = await http.post(
+      url,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: convert.jsonEncode(
+        <String, String>{
+          'user': user,
+          'title': title,
+          'img': base64Image,
+        },
+      ),
+    );
+
+    print(response.body);
+
+    if (response.statusCode == 200) {
+      print('success....!!!---');
+    } else {
+      print('Request failed with status: ${response.statusCode}.');
+    }
+  }
+
   static Future getOne(String id) async {
-    var url = 'https://cleanstreets.herokuapp.com/' +
-        email +
-        '/' +
-        id; //https://jsonplaceholder.typicode.com/todos
+    var url = 'https://cleanstreets.herokuapp.com/' + email + '/' + id;
     var response = await http.get(url);
     if (response.statusCode == 200) {
-      print(response);
+      print(response.body);
     } else {
       print('Request failed with status: ${response.statusCode}.');
     }
