@@ -48,8 +48,8 @@ class _CameraPreviewPageState extends State<CameraPreviewPage> {
             children: [
               ConstrainedBox(
                 constraints: BoxConstraints(
-                    maxHeight: screenHeight / 2,
-                    minHeight: screenHeight / 2,
+                    maxHeight: screenHeight*2/5,
+                    minHeight: screenHeight*2/5,
                     minWidth: screenWidth,
                     maxWidth: screenWidth),
                 child: FittedBox(
