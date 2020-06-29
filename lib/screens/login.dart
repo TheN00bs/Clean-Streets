@@ -8,8 +8,6 @@ class LoginScreen extends StatefulWidget {
   static const String id = 'login_screen';
   @override
   _LoginScreenState createState() => _LoginScreenState();
-
-
 }
 
 class _LoginScreenState extends State<LoginScreen> {
@@ -42,18 +40,22 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     super.initState();
     SharedData.getLocationPermission();
+    getCurrentUser().then(
+      (value) {
+        if (value == 'success') {
+          Navigator.popAndPushNamed(context, NewHomeScreen.id);
+        }
+      },
+    );
   }
-
-
 
   Widget _signInButton() {
     return OutlineButton(
       splashColor: Colors.grey,
-      onPressed: () {
-        signInWithGoogle().whenComplete(() {
-          //Navigator.popAndPushNamed(context, HomeScreen.id);
+      onPressed: () async {
+        String res = await signInWithGoogle();
+        if (res != 'error')
           Navigator.popAndPushNamed(context, NewHomeScreen.id);
-        });
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
       highlightElevation: 0,
