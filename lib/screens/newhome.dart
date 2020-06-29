@@ -16,10 +16,10 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
     setState(() {});
   }
 
-  var _tabs = [
+  List<Widget> _tabs = [
     HistoryWidget(),
     Center(
-      child: Text('No image Selected'),
+      child: Text('No image Selected!'),
     ),
     UserProfileWidget(),
   ];
