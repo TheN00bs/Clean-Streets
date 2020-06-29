@@ -5,6 +5,8 @@ import 'package:CleanStreets/widgets/request-tile.dart';
 import 'package:flutter/material.dart';
 
 class RequestList extends StatefulWidget {
+  final Function() notifyParentForLoad;
+  RequestList({@required this.notifyParentForLoad});
   @override
   _RequestListState createState() => _RequestListState();
 }
@@ -36,7 +38,15 @@ class _RequestListState extends State<RequestList> {
           id: data[i].id,
           title: data[i].title,
           callbackOnTap: () async {
+            setState(() {
+              SharedData.loading = true;
+            });
+            widget.notifyParentForLoad();
             await SharedData.getOne(data[i].id);
+            setState(() {
+              SharedData.loading = false;
+            });
+            widget.notifyParentForLoad();
             Navigator.pushNamed(context, PreviewScreen.id);
           },
         ),

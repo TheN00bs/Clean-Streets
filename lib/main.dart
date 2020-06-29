@@ -1,6 +1,5 @@
 import 'package:CleanStreets/cams/camera_screen.dart';
 import 'package:CleanStreets/screens/about.dart';
-import 'package:CleanStreets/screens/home.dart';
 import 'package:CleanStreets/screens/login.dart';
 import 'package:CleanStreets/screens/newhome.dart';
 import 'package:CleanStreets/screens/newrequest.dart';
@@ -19,7 +18,6 @@ class MyApp extends StatelessWidget {
       initialRoute: LoginScreen.id,
       routes: {
         AboutUs.id: (context) => AboutUs(),
-        HomeScreen.id: (context) => HomeScreen(),
         LoginScreen.id: (context) => LoginScreen(),
         PreviewScreen.id: (context) => PreviewScreen(),
         NewHomeScreen.id: (context) => NewHomeScreen(),

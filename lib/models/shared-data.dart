@@ -8,6 +8,8 @@ import 'package:flutter/services.dart';
 import 'package:location/location.dart' as loc;
 
 class SharedData {
+  static bool loading = false;
+
   static int currentIndexPage = 0;
 
   static String name;

@@ -3,6 +3,7 @@ import 'package:CleanStreets/screens/newhome.dart';
 import 'package:CleanStreets/tools/sign_in_module.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_overlay/loading_overlay.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = 'login_screen';
@@ -13,23 +14,26 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   @override
   LoginScreen get widget => super.widget;
-
+  bool _saving = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Image(
-                image: AssetImage("images/clean_streets.png"),
-                height: 110.0,
-              ),
-              SizedBox(height: 50),
-              _signInButton(),
-            ],
+      body: LoadingOverlay(
+        isLoading: _saving,
+        child: Container(
+          child: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Image(
+                  image: AssetImage("images/clean_streets.png"),
+                  height: 110.0,
+                ),
+                SizedBox(height: 50),
+                _signInButton(),
+              ],
+            ),
           ),
         ),
       ),
@@ -53,6 +57,9 @@ class _LoginScreenState extends State<LoginScreen> {
     return OutlineButton(
       splashColor: Colors.grey,
       onPressed: () async {
+        setState(() {
+          _saving = true;
+        });
         String res = await signInWithGoogle();
         if (res != 'error')
           Navigator.popAndPushNamed(context, NewHomeScreen.id);
