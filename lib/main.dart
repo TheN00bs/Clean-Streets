@@ -1,4 +1,5 @@
 import 'package:CleanStreets/cams/camera_screen.dart';
+import 'package:CleanStreets/screens/about.dart';
 import 'package:CleanStreets/screens/home.dart';
 import 'package:CleanStreets/screens/login.dart';
 import 'package:CleanStreets/screens/newhome.dart';
@@ -15,8 +16,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.dark(),
-      initialRoute: LoginScreen.id,
+      initialRoute: HomeScreen.id,
       routes: {
+        AboutUs.id: (context) => AboutUs(),
         HomeScreen.id: (context) => HomeScreen(),
         LoginScreen.id: (context) => LoginScreen(),
         PreviewScreen.id: (context) => PreviewScreen(),
