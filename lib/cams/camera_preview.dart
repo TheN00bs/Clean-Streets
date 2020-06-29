@@ -21,7 +21,8 @@ class _CameraPreviewPageState extends State<CameraPreviewPage> {
   Position position;
 
   getLocation() async {
-    position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    position = await Geolocator()
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
   }
 
   @override
@@ -29,7 +30,7 @@ class _CameraPreviewPageState extends State<CameraPreviewPage> {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
-   getLocation();
+    getLocation();
 
     if (SharedData.cameraImage == null) {
       return Center(
@@ -37,75 +38,76 @@ class _CameraPreviewPageState extends State<CameraPreviewPage> {
       );
     }
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.location_on),
-        onPressed: () => launchScrollSheet(context),
-        tooltip: "Location Tag",
-      ),
-     body: SingleChildScrollView(
-       child: Column(
-         children: [
-           ConstrainedBox(
-             constraints: BoxConstraints(
-                 maxHeight: screenHeight / 2,
-                 minHeight: screenHeight / 2,
-                 minWidth: screenWidth,
-                 maxWidth: screenWidth),
-             child: FittedBox(
-               child: Image.file(
-                 File(SharedData.cameraImage),
-               ),
-               fit: BoxFit.cover,
-             ),
-           ),
-           Column(
-             children: <Widget>[
-               Container(
-                 margin: EdgeInsets.all(20),
-                 child: TextField(
-                   controller: titleController,
-                   decoration: InputDecoration(
-                     border: OutlineInputBorder(),
-                     labelText: 'Title',
-                   ),
-                 ),
-               ),
-               Container(
-                 margin: EdgeInsets.all(20),
-                 child: OutlineButton(
-                   highlightedBorderColor: Colors.grey,
-                   borderSide: BorderSide(
-                     color: Colors.white,
-                   ),
-                   padding: EdgeInsets.symmetric(
-                     vertical: 10.0,
-                     horizontal: 20.0,
-                   ),
-                   onPressed: () async {
-                     await SharedData.sendData(
-                       SharedData.email,
-                       titleController.text,
-                       File(SharedData.cameraImage),
-                     );
-                     setState(() {
-                       SharedData.currentIndexPage = 0;
-                     });
-                     widget.notifyParent();
-                   },
-                   child: Text(
-                     'Submit',
-                     style: TextStyle(
-                       fontSize: 20.0,
-                     ),
-                   ),
-                 ),
-               ),
-             ],
-           ),
-         ],
-       ),
-     )
-    );
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.location_on),
+          onPressed: () => launchScrollSheet(context),
+          tooltip: "Location Tag",
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              ConstrainedBox(
+                constraints: BoxConstraints(
+                    maxHeight: screenHeight / 2,
+                    minHeight: screenHeight / 2,
+                    minWidth: screenWidth,
+                    maxWidth: screenWidth),
+                child: FittedBox(
+                  child: Image.file(
+                    File(SharedData.cameraImage),
+                  ),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Column(
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.all(20),
+                    child: TextField(
+                      keyboardType: TextInputType.text,
+                      textCapitalization: TextCapitalization.sentences,
+                      controller: titleController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Title',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(20),
+                    child: OutlineButton(
+                      highlightedBorderColor: Colors.grey,
+                      borderSide: BorderSide(
+                        color: Colors.white,
+                      ),
+                      padding: EdgeInsets.symmetric(
+                        vertical: 10.0,
+                        horizontal: 20.0,
+                      ),
+                      onPressed: () async {
+                        await SharedData.sendData(
+                          SharedData.email,
+                          titleController.text,
+                          File(SharedData.cameraImage),
+                        );
+                        setState(() {
+                          SharedData.currentIndexPage = 0;
+                        });
+                        widget.notifyParent();
+                      },
+                      child: Text(
+                        'Submit',
+                        style: TextStyle(
+                          fontSize: 20.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ));
   }
 
   launchScrollSheet(context) {
@@ -122,34 +124,29 @@ class _CameraPreviewPageState extends State<CameraPreviewPage> {
     markers[currentMarkerId] = current;
 
     showModalBottomSheet(
-      enableDrag: false,
-      context: context,
-      builder: (BuildContext bc){
-        return Container(
-          child: new Wrap(
+        enableDrag: false,
+        context: context,
+        builder: (BuildContext bc) {
+          return Container(
+              child: new Wrap(
             children: [
               ConstrainedBox(
                 constraints: BoxConstraints(
-                  maxHeight: MediaQuery.of(context).size.height*2/5,
-                  minHeight:MediaQuery.of(context).size.height*2/5,
-                  minWidth:MediaQuery.of(context).size.width,
-                  maxWidth:MediaQuery.of(context).size.width,
+                  maxHeight: MediaQuery.of(context).size.height * 2 / 5,
+                  minHeight: MediaQuery.of(context).size.height * 2 / 5,
+                  minWidth: MediaQuery.of(context).size.width,
+                  maxWidth: MediaQuery.of(context).size.width,
                 ),
                 child: GoogleMap(
                   onMapCreated: _onMapCreated,
                   markers: Set<Marker>.of(markers.values),
-                  initialCameraPosition: CameraPosition(
-                      target: _current,
-                      zoom: 15.0
-                  ),
+                  initialCameraPosition:
+                      CameraPosition(target: _current, zoom: 15.0),
                 ),
               )
-
             ],
-          )
-        );
-      }
-    );
+          ));
+        });
   }
 
   // Future<ByteData> getBytesFromFile() async {
