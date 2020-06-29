@@ -48,8 +48,8 @@ class _CameraPreviewPageState extends State<CameraPreviewPage> {
             children: [
               ConstrainedBox(
                 constraints: BoxConstraints(
-                    maxHeight: screenHeight*2/5,
-                    minHeight: screenHeight*2/5,
+                    maxHeight: screenHeight * 2 / 5,
+                    minHeight: screenHeight * 2 / 5,
                     minWidth: screenWidth,
                     maxWidth: screenWidth),
                 child: FittedBox(
@@ -90,9 +90,11 @@ class _CameraPreviewPageState extends State<CameraPreviewPage> {
                           titleController.text,
                           File(SharedData.cameraImage),
                         );
-                        setState(() {
-                          SharedData.currentIndexPage = 0;
-                        });
+                        if (this.mounted) {
+                          setState(() {
+                            SharedData.currentIndexPage = 0;
+                          });
+                        }
                         widget.notifyParent();
                       },
                       child: Text(
