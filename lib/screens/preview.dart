@@ -52,9 +52,9 @@ class _PreviewScreenState extends State<PreviewScreen> {
         ),
       ),
       DraggableScrollableSheet(
-        initialChildSize: 0.5,
+        initialChildSize: 0.2,
         minChildSize: 0.2,
-        maxChildSize: 0.8,
+        maxChildSize: 0.5,
         builder: (BuildContext context, ScrollController scrollController) {
           return Container(
             decoration: BoxDecoration(

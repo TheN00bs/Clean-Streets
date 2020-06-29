@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/painting.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -44,6 +45,7 @@ class _CameraPreviewPageState extends State<CameraPreviewPage> {
           tooltip: "Location Tag",
         ),
         body: SingleChildScrollView(
+          dragStartBehavior: DragStartBehavior.down,
           child: Column(
             children: [
               ConstrainedBox(
