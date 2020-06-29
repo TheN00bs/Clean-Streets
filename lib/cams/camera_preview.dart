@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/painting.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:loading_overlay/loading_overlay.dart';
 
 import '../models/shared-data.dart';
 import 'package:flutter/cupertino.dart';
@@ -26,6 +27,8 @@ class _CameraPreviewPageState extends State<CameraPreviewPage> {
         .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
   }
 
+  bool _saving = false;
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -38,80 +41,90 @@ class _CameraPreviewPageState extends State<CameraPreviewPage> {
         child: Text('No image Selected'),
       );
     }
-    return Scaffold(
-        floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.location_on),
-          onPressed: () => launchScrollSheet(context),
-          tooltip: "Location Tag",
-        ),
-        body: SingleChildScrollView(
-          dragStartBehavior: DragStartBehavior.down,
-          child: Column(
-            children: [
-              ConstrainedBox(
-                constraints: BoxConstraints(
-                    maxHeight: screenHeight * 2 / 5,
-                    minHeight: screenHeight * 2 / 5,
-                    minWidth: screenWidth,
-                    maxWidth: screenWidth),
-                child: FittedBox(
-                  child: Image.file(
-                    File(SharedData.cameraImage),
-                  ),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              Column(
-                children: <Widget>[
-                  Container(
-                    margin: EdgeInsets.all(20),
-                    child: TextField(
-                      keyboardType: TextInputType.text,
-                      textCapitalization: TextCapitalization.sentences,
-                      controller: titleController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Title',
-                      ),
+    return LoadingOverlay(
+      isLoading: _saving,
+      child: Scaffold(
+          floatingActionButton: FloatingActionButton(
+            child: Icon(Icons.location_on),
+            onPressed: () => launchScrollSheet(context),
+            tooltip: "Location Tag",
+          ),
+          body: SingleChildScrollView(
+            dragStartBehavior: DragStartBehavior.down,
+            child: Column(
+              children: [
+                ConstrainedBox(
+                  constraints: BoxConstraints(
+                      maxHeight: screenHeight * 2 / 5,
+                      minHeight: screenHeight * 2 / 5,
+                      minWidth: screenWidth,
+                      maxWidth: screenWidth),
+                  child: FittedBox(
+                    child: Image.file(
+                      File(SharedData.cameraImage),
                     ),
+                    fit: BoxFit.cover,
                   ),
-                  Container(
-                    margin: EdgeInsets.all(20),
-                    child: OutlineButton(
-                      highlightedBorderColor: Colors.grey,
-                      borderSide: BorderSide(
-                        color: Colors.white,
-                      ),
-                      padding: EdgeInsets.symmetric(
-                        vertical: 10.0,
-                        horizontal: 20.0,
-                      ),
-                      onPressed: () async {
-                        await SharedData.sendData(
-                          SharedData.email,
-                          titleController.text,
-                          File(SharedData.cameraImage),
-                        );
-                        if (this.mounted) {
-                          setState(() {
-                            SharedData.currentIndexPage = 0;
-                          });
-                        }
-                        widget.notifyParent();
-                      },
-                      child: Text(
-                        'Submit',
-                        style: TextStyle(
-                          fontSize: 20.0,
+                ),
+                Column(
+                  children: <Widget>[
+                    Container(
+                      margin: EdgeInsets.all(20),
+                      child: TextField(
+                        keyboardType: TextInputType.text,
+                        textCapitalization: TextCapitalization.sentences,
+                        controller: titleController,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Title',
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ));
+                    Container(
+                      margin: EdgeInsets.all(20),
+                      child: OutlineButton(
+                        highlightedBorderColor: Colors.grey,
+                        borderSide: BorderSide(
+                          color: Colors.white,
+                        ),
+                        padding: EdgeInsets.symmetric(
+                          vertical: 10.0,
+                          horizontal: 20.0,
+                        ),
+                        onPressed: () async {
+                          setState(() {
+                            _saving = true;
+                          });
+                          await SharedData.sendData(
+                            SharedData.email,
+                            titleController.text,
+                            File(SharedData.cameraImage),
+                          );
+
+                          if (this.mounted) {
+                            setState(
+                              () {
+                                _saving = false;
+                                SharedData.currentIndexPage = 0;
+                              },
+                            );
+                          }
+                          widget.notifyParent();
+                        },
+                        child: Text(
+                          'Submit',
+                          style: TextStyle(
+                            fontSize: 20.0,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          )),
+    );
   }
 
   launchScrollSheet(context) {
