@@ -58,9 +58,9 @@ class UserProfileWidget extends StatelessWidget {
                 ),
               ),
               OutlineButton(
-                onPressed: () {
-                  signOutGoogle();
-                  Navigator.pushReplacementNamed(context, LoginScreen.id);
+                onPressed: () async {
+                  signOutGoogle().then((value) =>
+                      Navigator.popAndPushNamed(context, LoginScreen.id));
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),

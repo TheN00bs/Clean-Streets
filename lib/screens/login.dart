@@ -40,6 +40,13 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     super.initState();
     SharedData.getLocationPermission();
+    getCurrentUser().then(
+      (value) {
+        if (value == 'success') {
+          Navigator.popAndPushNamed(context, NewHomeScreen.id);
+        }
+      },
+    );
   }
 
   Widget _signInButton() {
