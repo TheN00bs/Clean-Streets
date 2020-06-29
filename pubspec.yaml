@@ -38,6 +38,7 @@ dependencies:
   camera: ^0.5.8+2
   android_intent: ^0.3.7+2
   location: ^3.0.0
+  google_maps_flutter: ^0.5.28+1
 
 dev_dependencies:
   flutter_test:
