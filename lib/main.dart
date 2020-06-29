@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.dark(),
-      initialRoute: NewHomeScreen.id,
+      initialRoute: LoginScreen.id,
       routes: {
         AboutUs.id: (context) => AboutUs(),
         HomeScreen.id: (context) => HomeScreen(),
