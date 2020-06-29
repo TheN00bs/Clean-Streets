@@ -12,19 +12,30 @@ class NewHomeScreen extends StatefulWidget {
 }
 
 class _NewHomeScreenState extends State<NewHomeScreen> {
-  int _currentIndex = 0;
+  refresh() {
+    setState(() {});
+  }
+
   var _tabs = [
     HistoryWidget(),
-    CameraPreviewPage(),
+    Center(
+      child: Text('No image Selected'),
+    ),
     UserProfileWidget(),
   ];
+  //int _currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Clean Streets'),
       ),
-      body: _currentIndex == 1 ? CameraPreviewPage() : _tabs[_currentIndex],
+      body: SharedData.currentIndexPage == 1
+          ? CameraPreviewPage(
+              notifyParent: refresh,
+            )
+          : _tabs[SharedData.currentIndexPage],
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
@@ -43,10 +54,10 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
             backgroundColor: Colors.blue,
           ),
         ],
-        currentIndex: _currentIndex,
+        currentIndex: SharedData.currentIndexPage,
         onTap: (index) {
           setState(() {
-            _currentIndex = index;
+            SharedData.currentIndexPage = index;
           });
           if (index == 1) {
             SharedData.cameraImage = null;
@@ -54,7 +65,7 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
               (value) {
                 print(SharedData.cameraImage);
                 setState(() {
-                  _currentIndex = 1;
+                  SharedData.currentIndexPage = 1;
                 });
               },
             );

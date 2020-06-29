@@ -1,9 +1,12 @@
 import 'dart:io';
+
 import '../models/shared-data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CameraPreviewPage extends StatefulWidget {
+  final Function() notifyParent;
+  CameraPreviewPage({@required this.notifyParent});
   @override
   _CameraPreviewPageState createState() => _CameraPreviewPageState();
 }
@@ -57,13 +60,15 @@ class _CameraPreviewPageState extends State<CameraPreviewPage> {
                     horizontal: 20.0,
                   ),
                   onPressed: () async {
-                    var response = await SharedData.sendData(
+                    await SharedData.sendData(
                       SharedData.email,
                       titleController.text,
                       File(SharedData.cameraImage),
                     );
-                    print(response);
-                    print('====7=7=7=7=7=7=777777777777');
+                    setState(() {
+                      SharedData.currentIndexPage = 0;
+                    });
+                    widget.notifyParent();
                   },
                   child: Text(
                     'Submit',

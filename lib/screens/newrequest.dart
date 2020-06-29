@@ -3,8 +3,6 @@ import 'dart:io';
 import 'package:CleanStreets/models/shared-data.dart';
 import 'package:flutter/material.dart';
 
-import 'login.dart';
-
 class NewRequestScreen extends StatefulWidget {
   static const String id = "new_request_screen";
   final File image;
@@ -46,6 +44,8 @@ class _NewRequestScreenState extends State<NewRequestScreen> {
                 Container(
                   margin: EdgeInsets.all(20),
                   child: TextField(
+                    keyboardType: TextInputType.text,
+                    textCapitalization: TextCapitalization.sentences,
                     controller: titleController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
@@ -63,10 +63,9 @@ class _NewRequestScreenState extends State<NewRequestScreen> {
                     onPressed: () async {
                       print("Pressed");
                       SharedData.getLocationPermission();
-                      var response = await SharedData.sendData(
+                      await SharedData.sendData(
                           SharedData.email, titleController.text, widget.image);
-                      print(response);
-                      print('====7=7=7=7=7=7=777777777777');
+                      //print(response);
                     },
                     child: Text(
                       'Submit',

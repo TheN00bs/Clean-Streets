@@ -7,8 +7,9 @@ import 'package:geolocator/geolocator.dart';
 import 'package:flutter/services.dart';
 import 'package:location/location.dart' as loc;
 
-
 class SharedData {
+  static int currentIndexPage = 0;
+
   static String name;
   static String email;
   static String profileUrl;
@@ -47,7 +48,7 @@ class SharedData {
     return _tasks;
   }
 
-  static Future<Task> sendData(String user, String title, File imgFile) async {
+  static Future<void> sendData(String user, String title, File imgFile) async {
     Position position = await Geolocator()
         .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     print(position);
@@ -77,10 +78,10 @@ class SharedData {
       var res = convert.jsonDecode(response.body);
       Task temp = new Task(id: res['id'], title: res['title']);
       _tasks.add(temp);
-      return temp;
+      //return temp;
     } else {
       print('Request failed with status: ${response.statusCode}.');
-      return null;
+      //return null;
     }
   }
 
@@ -102,19 +103,19 @@ class SharedData {
     print("In");
     loc.Location location = new loc.Location();
     bool _locationEnabled = await location.serviceEnabled();
-    if(!_locationEnabled){
+    if (!_locationEnabled) {
       print("Asking Location");
       _locationEnabled = await location.requestService();
 
-      if(!_locationEnabled){
+      if (!_locationEnabled) {
         SystemNavigator.pop();
       }
     }
     loc.PermissionStatus _permissionGranted = await location.hasPermission();
-    if(_permissionGranted == loc.PermissionStatus.denied){
+    if (_permissionGranted == loc.PermissionStatus.denied) {
       _permissionGranted = await location.requestPermission();
 
-      if(_permissionGranted == loc.PermissionStatus.denied){
+      if (_permissionGranted == loc.PermissionStatus.denied) {
         SystemNavigator.pop();
       }
     }
