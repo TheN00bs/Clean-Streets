@@ -1,16 +1,22 @@
 # CleanStreets
 
-A new Flutter project.
+A step todawards Go Green, Digitalization and Eco Friendly.
 
-## Getting Started
+Problem?
+Garbage dump in neighbourhoods has been a critical issue among developing countries. This makes the residency unhygience.
 
-This project is a starting point for a Flutter application.
+Although it is an individual's responsibility to not dump garbage careless, the least they can do is to notify the officials about it.
 
-A few resources to get you started if this is your first Flutter project:
+This apps acts as a platform between the user and their municipal coorporation.
+A user can snap a picture of any inconvenience like a garbage dump or pot holes near them and post it as a request. The application tags the request with location coordinates so the user doesnt have to input address.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+Snap a picture and post it just like on any social media. Effortless.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+Technologies Used:
+
+Flutter Framework
+Google API Maps SDK for Android
+Mongo DB, PyMongo
+Firebase Authentication
+Flask Python Server
