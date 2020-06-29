@@ -20,3 +20,9 @@ Google API Maps SDK for Android
 Mongo DB, PyMongo
 Firebase Authentication
 Flask Python Server
+
+
+Developers:
+
+Saurabh Verma
+Mahershi Bhavsar
