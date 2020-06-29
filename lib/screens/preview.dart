@@ -42,8 +42,8 @@ class _PreviewScreenState extends State<PreviewScreen> {
           children: <Widget>[
             ConstrainedBox(
                 constraints: BoxConstraints(
-                    maxHeight: screenHeight*2/5,
-                    minHeight: screenHeight*2/5,
+                    maxHeight: screenHeight*2/7,
+                    minHeight: screenHeight*2/7,
                     minWidth: screenWidth,
                     maxWidth: screenWidth),
                 child: GoogleMap(
