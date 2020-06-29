@@ -37,6 +37,7 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
             )
           : _tabs[SharedData.currentIndexPage],
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.black38,
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),

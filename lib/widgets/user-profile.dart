@@ -1,4 +1,6 @@
 import 'package:CleanStreets/models/shared-data.dart';
+import 'package:CleanStreets/screens/login.dart';
+import 'package:CleanStreets/tools/sign_in_module.dart';
 import 'package:flutter/material.dart';
 
 class UserProfileWidget extends StatelessWidget {
@@ -56,7 +58,10 @@ class UserProfileWidget extends StatelessWidget {
                 ),
               ),
               OutlineButton(
-                onPressed: () {},
+                onPressed: () {
+                  signOutGoogle();
+                  Navigator.pushReplacementNamed(context, LoginScreen.id);
+                },
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
