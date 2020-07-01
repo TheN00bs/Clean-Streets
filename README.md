@@ -21,6 +21,9 @@ Mongo DB, PyMongo
 Firebase Authentication
 Flask Python Server
 
+Note:
+The Google Maps API key is restriced therfore the MiniMap in the App wont render if the project is build in unknown device.
+
 
 Developers:
 
