@@ -1,6 +1,6 @@
 # CleanStreets
 
-A step todawards Go Green, Digitalization and Eco Friendly.
+A step towards Go Green, Digitalization and Eco Friendly.
 
 Problem?
 Garbage dump in neighbourhoods has been a critical issue among developing countries. This makes the residency unhygience.
